@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+</head>
+<style>
+	table {
+    width: 100%;
+    border: 1px solid #444444;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
+  
+</style>
+<body>
+<table>
+	<tr>
+		<td th:text="${student.id}">아이디1</td>
+		<td th:text="${student.studentNumber}">학생번호2</td>
+	</tr>
+	<tr>
+		<td th:text="${student.studentName}">학생이름3</td>
+		<td th:text="${student.email}">이메일4</td>
+	</tr>
+</table>
+</body>
+</html>
