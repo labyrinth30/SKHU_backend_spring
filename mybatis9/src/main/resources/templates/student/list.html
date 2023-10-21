@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/common.css" />
+  <script type="text/javascript" src="/common.js"></script>
+  <style>
+    form { margin-bottom: 4px; }
+    a.btn:last-child { margin-left: 20px; }
+  </style>
+</head>
+<body onload="pagination()">
+<div class="container">
+  <h1>학생목록</h1>
+  <form method="get" th:object="${pagination}">
+    <input type="hidden" name="pg" value="1" />
+    <select th:field="*{od}">
+        <option th:each="order : ${ orders }"
+                th:value="${ order.value }" th:text="${ order.label }"></option>
+    </select>
+    <input type="text" th:field="*{st}" placeholder="검색" />
+    <button type="submit" class="btn">검색</button>
+    <a href="list" class="btn">취소</a>  
+    <a th:href="${ 'create?' + pagination.queryString }" class="btn blue">학생등록</a>  
+  </form>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>학번</th>
+        <th>이름</th>
+        <th>학과</th>
+        <th>전화</th>
+        <th>성별</th>
+        <th>이메일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="st : ${ students }" 
+          th:href="${ 'edit?id=' + st.id + '&' + pagination.queryString }"
+          onclick="onClickHref(event)">
+        <td th:text="${ st.id }"></td>
+        <td th:text="${ st.studentNo }"></td>
+        <td th:text="${ st.name }"></td>
+        <td th:text="${ st.departmentName }"></td>
+        <td th:text="${ st.phone }"></td>
+        <td th:text="${ st.sex }"></td>
+        <td th:text="${ st.email }"></td>
+      </tr>
+    </tbody>
+  </table>  
+  <div class="pagination" th:data-record-count="${pagination.recordCount}"
+       th:data-page-size="${pagination.sz}" th:data-current-page="${pagination.pg}"></div>
+</div>
+</body>
+</html>
+

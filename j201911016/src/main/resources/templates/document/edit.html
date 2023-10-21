@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/common.css" />
+  <style>
+    form { width: 600px; margin: auto; padding: 5px 20px; box-shadow: 2px 2px 5px gray; }
+    div.table { display: table; }
+    div.row { display: table-row; }
+    div.cell { display: table-cell; padding: 5px; }
+    div.cell:nth-child(1) { width: 100; text-align: right; vertical-align: top; }
+    div.buttons { margin: 1em; }
+  </style>
+</head>
+<body>
+<div class="container">
+ <form method="post" th:object="${documentEdit}">
+    <h1 th:text="${documentEdit.id > 0 ? '문서 수정' : '문서 등록'}"></h1>
+    <div class="table">
+      <div class="row">
+        <div class="cell">파일명:</div>
+        <div class="cell">
+           <input type="text" th:field="*{fileName}" />
+           <div class="error" th:errors="*{fileName}"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">크기:</div>
+        <div class="cell">
+          <input type="text" th:field="*{size}" />
+          <div class="error" th:errors="*{size}"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">폴더:</div>
+        <div class="cell">
+          <select th:field="*{folderId}">
+            <option value="0">폴더를 선택하세요</option>
+            <option th:each="fd : ${ folders }"
+                    th:value="${ fd.id }" th:text="${ fd.title }">
+            </option>
+          </select>
+          <div class="error" th:errors="*{folderId}"></div>
+         </div>
+      </div>
+      <div class="row">
+        <div class="cell">수정일:</div>
+        <div class="cell">
+          <input type="text" th:field="*{modifiedDate}" />
+          <div class="error" th:errors="*{modifiedDate}"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">상태:</div>
+        <div class="cell">
+          <input type="text" th:field="*{state}" />
+          <div class="error" th:errors="*{state}"></div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="buttons">
+      <button type="submit" class="btn blue" 
+              name="cmd" value="save">저장</button>
+      <button type="submit" class="btn red" 
+              th:if="${ documentEdit.id > 0 }"
+              onclick="return confirm('삭제하시겠습니까?')"
+              name="cmd" value="delete">삭제</button>
+      <a th:href="${ 'list?' + pagination.queryString }" class="btn">목록으로</a>
+    </div>
+    <div class="error" th:errors="${documentEdit}"></div>
+  </form>
+</div>
+</body>
+</html>
+
