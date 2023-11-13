@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/common.css}" />
+  <style>
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>학과목록</h1>
+<table class="list">
+  <thead>
+    <tr>
+    <th>id</th>
+    <th>학과명</th>
+    <th>단축명</th>
+    <th>전화</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="dp : ${ departments }">
+      <td th:text="${ dp.id }"></td>
+      <td th:text="${ dp.name }"></td>
+      <td th:text="${ dp.shortName }"></td>
+      <td th:text="${ dp.phone }"></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+</body>
+</html>
+
