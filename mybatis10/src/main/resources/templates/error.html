@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/common.css}" />
+  <style>
+    .btn { margin-top: 20px; }
+  </style>
+</head>
+<body onload="pagination()">
+<div class="container">
+   <h1>에러 발생</h1>
+  <div>작업 도중 에러가 발생했습니다.</div>
+  <a th:href="@{/student/list}" class="btn">학생 목록으로</a>
+</div>
+</body>
+</html>
+
