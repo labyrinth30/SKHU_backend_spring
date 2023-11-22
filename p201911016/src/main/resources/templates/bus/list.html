@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/common.css}" />
+  <style>
+    form { margin-bottom: 4px; }
+    a.btn { float: right; margin-top: -40px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>버스목록</h1>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>버스번호 </th>
+        <th>출발역 </th>
+        <th>도착역 </th>
+        <th>카테고리 </th>
+        <th>첫차시각 </th>
+        <th>막차시각 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="bs : ${ buses }">
+        <td th:text="${ bs.id }"></td>
+        <td th:text="${ bs.busNo }"></td>
+        <td th:text="${ bs.firstStop }"></td>
+        <td th:text="${ bs.lastStop }"></td>
+        <td th:text="${ bs.category.categoryName}"></td>
+        <td th:text="${ bs.firstBus }"></td>
+        <td th:text="${ bs.lastBus }"></td>
+      </tr>
+    </tbody>
+  </table>  
+</div>
+</body>
+</html>
+
