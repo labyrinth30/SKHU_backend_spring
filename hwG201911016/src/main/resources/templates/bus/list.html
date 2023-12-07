@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/common.css" />
+  <script type="text/javascript" src="/common.js"></script>
+  <style>
+    form { margin-bottom: 4px; }
+    a.btn:last-child { margin-left: 20px; }
+  </style>
+</head>
+<body onload="pagination()">
+<div class="container">
+  <h1>버스목록</h1>
+  <form method="get" th:object="${pagination}">
+    <input type="hidden" name="pg" value="1" />
+    <select th:field="*{od}">
+        <option th:each="order : ${ orders }"
+                th:value="${ order.value }" th:text="${ order.label }"></option>
+    </select>
+    <input type="text" th:field="*{st}" placeholder="검색" />
+    <button type="submit" class="btn">검색</button>
+    <a href="list" class="btn">취소</a>  
+    <a th:href="${ 'create?' + pagination.queryString }" class="btn blue">버스등록</a>  
+  </form>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>버스번호</th>
+        <th>출발역</th>
+        <th>도착역</th>
+        <th>버스종류</th>
+        <th>첫차시각</th>
+        <th>막차시각</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="bs : ${ buses }" 
+          th:href="${ 'edit?id=' + bs.id + '&' + pagination.queryString }"
+          onclick="onClickHref(event)">
+        <td th:text="${ bs.id }"></td>
+        <td th:text="${ bs.busNo }"></td>
+        <td th:text="${ bs.firstStop}"></td>
+        <td th:text="${ bs.lastStop}"></td>
+        <td th:text="${ bs.category.categoryName }"></td>
+        <td th:text="${ bs.firstBus }"></td>
+        <td th:text="${ bs.lastBus }"></td>
+      </tr>
+    </tbody>
+  </table>  
+  <div class="pagination" th:data-record-count="${pagination.recordCount}"
+       th:data-page-size="${pagination.sz}" th:data-current-page="${pagination.pg}"></div>
+</div>
+</body>
+</html>
+
