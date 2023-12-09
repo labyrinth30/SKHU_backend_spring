@@ -13,7 +13,7 @@ public class BookEdit {
     int id;
 
     @NotEmpty @NotBlank
-    @Size(min=8, max=12)
+    @Size(min=2, max=12)
     String title;
 
     @NotEmpty @NotBlank
